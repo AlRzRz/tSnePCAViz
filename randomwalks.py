@@ -7,14 +7,14 @@ import time
 
 
 # [x] Implementation of a random walk func to simulate a trader's pot size based on his win-rate (hacker statistics basically)
-def randomWalkDownWallSt(winRate, trades, potsize, riskToReward, multiplier):
+def randomWalkDownWallSt(winRate, trades, potsize, riskToReward, multiplier, seed):
     
     win = multiplier * riskToReward
     loss = multiplier
 
     potTracker = [potsize]
 
-    np.random.seed(int(time.time()))
+    np.random.seed(seed=seed)
 
     for _ in range(trades):
         rand0To1 = np.random.rand()
@@ -44,9 +44,15 @@ def main(winrate, trades, potsize, riskToReward, multiplier, numSimulations):
     
     simulations = []
 
-    for _ in range(numSimulations):
-        simulations.append(randomWalkDownWallSt(winRate=winrate, trades=trades, potsize=potsize, riskToReward=riskToReward, multiplier=multiplier))
+    seed = int(time.time())
 
+    for _ in range(numSimulations):
+
+
+        simulations.append(randomWalkDownWallSt(winRate=winrate, trades=trades, potsize=potsize, riskToReward=riskToReward, multiplier=multiplier, seed=seed))
+        seed += 1
+
+    print(simulations[1][:10])
     
     # We can see that this plots 15001 lines (in the situation I tested, X amount of lines in general) for each simulation. Basically, for each second of the simulation, it plots a line that
     # connects all the simulations positions at that second. Instead we need to find the lines for each simulation plotted through all the seconds. Numpy works by making a line for each feature.
@@ -54,11 +60,12 @@ def main(winrate, trades, potsize, riskToReward, multiplier, numSimulations):
     # for 5 different lines (each line signifying a simulation. Therefore we need to perform a transverse operation on the matrix to switch the rows and colums: basically go from (y, x) to (x, y))
     np_sims = np.array(simulations)
     print(np_sims.shape)
+    print(np_sims[1][:10])
 
     np_sims_t = np_sims.transpose()
     print(np_sims_t.shape)
 
-    print(np_sims_t[0:2])
+    print(np_sims_t[0:3])
     
     fig, ax = plt.subplots()
     ax.plot(np_sims_t)
@@ -74,10 +81,10 @@ if __name__ == "__main__":
 
     WINRATE = 0.85
     RISKTOREWARD = 3
-    POTSIZE = 10000
-    TRADES = 15000
-    MULTIPLIER = 2000
-    NUM_SIMULATIONS = 5
+    POTSIZE = 3000
+    TRADES = 1000
+    MULTIPLIER = 1000
+    NUM_SIMULATIONS = 30
     
     main(winrate=WINRATE, trades=TRADES, potsize=POTSIZE, riskToReward=RISKTOREWARD, multiplier=MULTIPLIER, numSimulations=NUM_SIMULATIONS)
     
