@@ -79,12 +79,12 @@ def main(winrate, trades, potsize, riskToReward, multiplier, numSimulations):
 
 if __name__ == "__main__":
 
-    WINRATE = 0.85
-    RISKTOREWARD = 3
-    POTSIZE = 3000
+    WINRATE = 0.50
+    RISKTOREWARD = 1
+    POTSIZE = 10000
     TRADES = 1000
     MULTIPLIER = 1000
-    NUM_SIMULATIONS = 30
+    NUM_SIMULATIONS = 20
 
     print('\n', 'APPLICATION HAS INITIALIZED'.center(35, '-'), '\n')
     print(f"""
@@ -129,7 +129,7 @@ CURRENT VARIABLES:
             elif indexOfTarget == 4:
                 MULTIPLIER = changeToResp
             elif indexOfTarget == 5:
-                NUM_SIMULATIONS = changeToResp
+                NUM_SIMULATIONS = int(changeToResp)
             break
 
 
@@ -148,5 +148,5 @@ FINAL VARIABLES:
 
 
     
-    # main(winrate=WINRATE, trades=TRADES, potsize=POTSIZE, riskToReward=RISKTOREWARD, multiplier=MULTIPLIER, numSimulations=NUM_SIMULATIONS)
+    main(winrate=WINRATE, trades=TRADES, potsize=POTSIZE, riskToReward=RISKTOREWARD, multiplier=MULTIPLIER, numSimulations=NUM_SIMULATIONS)
     
