@@ -85,6 +85,68 @@ if __name__ == "__main__":
     TRADES = 1000
     MULTIPLIER = 1000
     NUM_SIMULATIONS = 30
+
+    print('\n', 'APPLICATION HAS INITIALIZED'.center(35, '-'), '\n')
+    print(f"""
+CURRENT VARIABLES:
+        WINRATE - ONLY ASSIGN FLOAT SYMBOLIZING A PERCENTAGE: {WINRATE}
+        RISK-REWARD (RR) - INT: {RISKTOREWARD}
+        POTSIZE - INT: {POTSIZE}
+        TRADES - INT: {TRADES}
+        MULTIPLIER - INT: {MULTIPLIER}
+        NUMBER OF SIMULATIONS (NUM_SIMS) - INT: {NUM_SIMULATIONS}
+""")
     
-    main(winrate=WINRATE, trades=TRADES, potsize=POTSIZE, riskToReward=RISKTOREWARD, multiplier=MULTIPLIER, numSimulations=NUM_SIMULATIONS)
+    while True:
+        valid_resps = ['winrate', 'rr', 'potsize', 'trades', 'multiplier', 'num_sims']
+
+        user_resp = input('Would you like to change any of these starting variables? If so, please indicate so by writing its corresponding name (or the name in-between parentheses if present). Please indicate any variation of the word "quit" to exit:\n').lower()
+        print()
+        if user_resp.lower() == 'quit':
+            break
+        elif user_resp.lower() not in valid_resps:
+            continue
+
+        indexOfTarget = valid_resps.index(user_resp)
+
+        while True:
+            changeToResp = float(input(f'What would you like to change {user_resp.upper()} to? (DOUBLE CHECK RECOMMEND DATA TYPE TO AVOID THE PROGRAM CRASHING!)\n'))
+            print()
+            # if not isinstance(changeToResp, int) and not isinstance(changeToResp, float):
+            #     print('Please provide a valid int/float as the data type.\n')
+            #     continue
+
+            # [x] Assign variable here and break
+
+            if indexOfTarget == 0:
+                WINRATE = changeToResp
+            elif indexOfTarget == 1:
+                RISKTOREWARD = changeToResp
+            elif indexOfTarget == 2:
+                POTSIZE = changeToResp
+            elif indexOfTarget == 3:
+                TRADES = changeToResp
+            elif indexOfTarget == 4:
+                MULTIPLIER = changeToResp
+            elif indexOfTarget == 5:
+                NUM_SIMULATIONS = changeToResp
+            break
+
+
+    print("\nSTARTING APPLICATION WITH:".center(35, '='), '\n')
+    print(f"""
+FINAL VARIABLES:
+        WINRATE: {WINRATE}
+        RISK-REWARD (RR): {RISKTOREWARD}
+        POTSIZE: {POTSIZE}
+        TRADES: {TRADES}
+        MULTIPLIER: {MULTIPLIER}
+        NUMBER OF SIMULATIONS (NUM_SIMS): {NUM_SIMULATIONS}
+""")
+
+
+
+
+    
+    # main(winrate=WINRATE, trades=TRADES, potsize=POTSIZE, riskToReward=RISKTOREWARD, multiplier=MULTIPLIER, numSimulations=NUM_SIMULATIONS)
     
