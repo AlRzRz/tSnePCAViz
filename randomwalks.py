@@ -125,7 +125,7 @@ CURRENT VARIABLES:
             elif indexOfTarget == 2:
                 POTSIZE = changeToResp
             elif indexOfTarget == 3:
-                TRADES = changeToResp
+                TRADES = int(changeToResp)
             elif indexOfTarget == 4:
                 MULTIPLIER = changeToResp
             elif indexOfTarget == 5:
